@@ -1,0 +1,62 @@
+.confirmation-dialog {
+  /* 位置関係調節の基準をブラウザの画面に固定(スクロールしても動かない) */
+  position: fixed;
+  /* 左上端の位置を画面の中央に移動 */
+  top: 50%;
+  left: 50%;
+  margin: 0;
+  /* 自身のサイズの半分だけマイナス方向に戻す */
+  transform: translate(-50%, -50%);
+
+  width: min(82vw, 1010px);
+  height: min(58vh, 390px);
+  min-height: 300px;
+  padding: 0;
+
+  border: 1px solid #65705f;
+  border-radius: clamp(40px, 6vw, 68px);
+  background-image: linear-gradient(135deg, #56c962, #2766c0);
+}
+
+/* <dialog> 要素に open 属性が付与され開いているときに適用 */
+.confirmation-dialog[open] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+/* <dialog> 要素を .showModal() で開いたときなどに背後を覆う領域に適用 */
+.confirmation-dialog::backdrop {
+  background-color: rgb(0 0 0 / 18%);
+}
+
+.confirmation-dialog__message {
+  max-width: 90%;
+  margin: 0;
+  font-size: clamp(20px, 3vw, 34px);
+  text-align: center;
+  /* 横幅が足らない時に単語の途中であっても強制的に改行させる */
+  overflow-wrap: anywhere;
+}
+
+.confirmation-dialog > .plain-button-pair {
+  width: min(86%, 700px);
+}
+
+.confirmation-dialog > .plain-button-pair > .plain-button {
+  width: min(44%, 322px);
+  min-height: clamp(88px, 11vw, 114px);
+}
+
+@media (max-height: 520px) {
+  .confirmation-dialog {
+    height: 80vh;
+    min-height: 0;
+  }
+
+  .confirmation-dialog > .plain-button-pair > .plain-button {
+    min-height: 72px;
+    padding-block: 12px;
+  }
+}
