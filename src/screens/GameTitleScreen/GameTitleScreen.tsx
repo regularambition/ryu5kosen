@@ -13,7 +13,7 @@ function GameTitleScreen({ isStarting, startError }: GameTitleScreenProps) {
         ゲーム開始
       </h2>
       {isStarting && <h6>ユーザー情報を確認中…</h6>}
-      {startError ?? <h6>{startError}</h6>}
+      {startError && <h6 role="alert">{startError}</h6>}
     </>
   );
 }

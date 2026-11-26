@@ -45,7 +45,3 @@
   margin: 0;
   font-size: clamp(18px, 3vw, 32px);
 }
-
-.text-input-with-hint__error {
-  color: #ffd1d1;
-}
