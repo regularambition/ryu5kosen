@@ -1,13 +1,9 @@
-import {
-  createContext,
-  useContext,
-  type Dispatch,
-  type SetStateAction,
-} from 'react';
+import { createContext, useContext } from 'react';
 
 export type UserContextValue = {
-  userName: string;
-  setUserName: Dispatch<SetStateAction<string>>;
+  userName: string | null;
+  loadUserName: () => Promise<string | null>;
+  saveUserName: (name: string) => Promise<void>;
 };
 
 export const UserContext = createContext<UserContextValue | undefined>(

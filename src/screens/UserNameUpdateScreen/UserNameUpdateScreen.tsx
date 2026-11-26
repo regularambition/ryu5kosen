@@ -1,4 +1,4 @@
-import { useState, type SubmitEventHandler } from 'react';
+import { useRef, useState, type SubmitEventHandler } from 'react';
 import SidebarScreenLayout from '../../components/layouts/SidebarScreenLayout';
 import PlainButton from '../../components/ui/buttons/PlainButton/PlainButton';
 import ConfirmationDialog from '../../components/ui/dialogs/ConfirmationDialog/ConfirmationDialog';
@@ -7,15 +7,22 @@ import { useScreenNavigation } from '../../contexts/ScreenNavigationContext';
 import { useUser } from '../../contexts/UserContext';
 import UserNameValidator from '../../validators/UserNameValidator';
 import './UserNameUpdateScreen.css';
+import { ScreenId } from '../../types/ScreenId';
 
 function UserNameUpdateScreen() {
-  const { setUserName } = useUser();
-  const { goBack } = useScreenNavigation();
+  const { userName, saveUserName } = useUser();
+  const { goBack, replace } = useScreenNavigation();
   const [newUserName, setNewUserName] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
+  const savingRef = useRef(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   const handleSubmit: SubmitEventHandler<HTMLFormElement> = (event) => {
+    if (isSaving) {
+      return;
+    }
+
     event.preventDefault();
     const validationResult = UserNameValidator.validate(newUserName);
 
@@ -27,10 +34,33 @@ function UserNameUpdateScreen() {
     setIsConfirmationOpen(true);
   };
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
+    if (savingRef.current) return;
+
+    savingRef.current = true;
+    setIsSaving(true);
     setIsConfirmationOpen(false);
-    setUserName(newUserName);
-    goBack();
+    setErrorMessage('');
+
+    const isFirstRegistration = userName === null;
+
+    try {
+      await saveUserName(newUserName);
+
+      if (isFirstRegistration) {
+        replace(ScreenId.TOP_MENU);
+      } else {
+        goBack();
+      }
+    } catch (error) {
+      console.error(error);
+      setErrorMessage(
+        'ユーザー名を保存できませんでした。もう一度お試しください。',
+      );
+    } finally {
+      savingRef.current = false;
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -55,7 +85,9 @@ function UserNameUpdateScreen() {
           }}
         />
 
-        <PlainButton type="submit">決定</PlainButton>
+        <PlainButton type="submit" disabled={isSaving}>
+          決定
+        </PlainButton>
       </form>
 
       <ConfirmationDialog
@@ -63,7 +95,7 @@ function UserNameUpdateScreen() {
         onConfirm={handleConfirm}
         onCancel={() => setIsConfirmationOpen(false)}
       >
-        「{newUserName}」に変更します。よろしいですか？
+        ユーザー名を「{newUserName}」に更新します。よろしいですか？
       </ConfirmationDialog>
     </SidebarScreenLayout>
   );

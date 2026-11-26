@@ -44,14 +44,22 @@ function ScreenNavigationProvider({ children }: ScreenNavigationProviderProps) {
     });
   }, []);
 
+  const replace = useCallback((screenId: ScreenId) => {
+    setScreenHistory((previousHistory) => [
+      ...previousHistory.slice(0, -1),
+      screenId,
+    ]);
+  }, []);
+
   const contextValue = useMemo<ScreenNavigationContextValue>(
     () => ({
       currentScreen,
       canGoBack: screenHistory.length > 1,
       navigate,
       goBack,
+      replace,
     }),
-    [currentScreen, screenHistory.length, navigate, goBack],
+    [currentScreen, screenHistory.length, navigate, goBack, replace],
   );
 
   return (

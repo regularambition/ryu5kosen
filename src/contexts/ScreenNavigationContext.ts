@@ -6,6 +6,7 @@ export type ScreenNavigationContextValue = {
   canGoBack: boolean;
   navigate: (screenId: ScreenId) => void;
   goBack: () => void;
+  replace: (screenId: ScreenId) => void;
 };
 
 export const ScreenNavigationContext = createContext<
