@@ -32,30 +32,7 @@ setGlobalOptions({ maxInstances: 10 });
 // });
 
 import { initializeApp } from 'firebase-admin/app';
-import { getDatabase } from 'firebase-admin/database';
-import { HttpsError, onCall } from 'firebase-functions/v2/https';
 
 initializeApp();
 
-const region = 'asia-southeast1';
-
-export const updateUserName = onCall<{ name?: unknown }>(
-  { region },
-  async (request) => {
-    const uid = request.auth?.uid;
-    if (!uid) {
-      throw new HttpsError('unauthenticated', 'ログインが必要です。');
-    }
-
-    const name = request.data?.name;
-    if (typeof name !== 'string' || !/^[A-Za-z0-9]{1,16}$/.test(name)) {
-      throw new HttpsError(
-        'invalid-argument',
-        '1〜16文字の半角英数字で入力してください。',
-      );
-    }
-
-    await getDatabase().ref(`users/${uid}/userName`).set(name);
-    return { userName: name };
-  },
-);
+export { updateUserName } from './exported/userProfile';

@@ -1,7 +1,7 @@
 export type UserNameValidationResult =
   { isValid: true } | { isValid: false; errorMessage: string };
 
-class UserNameValidator {
+export class UserNameValidator {
   private static readonly MIN_LENGTH = 1;
   private static readonly MAX_LENGTH = 16;
 
@@ -34,5 +34,3 @@ class UserNameValidator {
     return UserNameValidator.HINT;
   }
 }
-
-export default UserNameValidator;
