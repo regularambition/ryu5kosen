@@ -2,18 +2,13 @@ import { useState, type ReactNode } from 'react';
 import { UserContext } from './UserContext';
 import { signInAnonymously } from 'firebase/auth';
 import { get, ref } from 'firebase/database';
-import { auth, db, functions } from '../firebase';
-import { httpsCallable } from 'firebase/functions';
+import { auth, db } from '../firebase';
 import { databasePaths } from '../../functions/src/shared';
+import { updateUserName } from '../api/functions';
 
 type UserProviderProps = {
   children: ReactNode;
 };
-
-const updateUserName = httpsCallable<{ name: string }, { userName: string }>(
-  functions,
-  'updateUserName',
-);
 
 function UserProvider({ children }: UserProviderProps) {
   const [userName, setUserName] = useState<string | null>(null);
@@ -37,12 +32,12 @@ function UserProvider({ children }: UserProviderProps) {
     return name;
   };
 
-  const saveUserName = async (name: string): Promise<void> => {
+  const saveUserName = async (nameInput: string): Promise<void> => {
     if (!auth.currentUser) {
       throw new Error('ユーザーが認証されていません');
     }
 
-    const { data } = await updateUserName({ name });
+    const { data } = await updateUserName({ nameInput: nameInput });
     setUserName(data.userName);
   };
 
