@@ -20,7 +20,9 @@ function TopMenuScreen() {
       <PlainButtonPair>
         <PlainButton onClick={() => alert('mbm')}>ゲームを遊ぶ</PlainButton>
 
-        <PlainButton onClick={() => alert('fes')}>遊び方</PlainButton>
+        <PlainButton onClick={() => navigate(ScreenId.HOW_TO_PLAY)}>
+          遊び方
+        </PlainButton>
       </PlainButtonPair>
 
       <PlainButtonPair>

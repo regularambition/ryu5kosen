@@ -7,6 +7,7 @@ import UserNameUpdateScreen from './screens/UserNameUpdateScreen/UserNameUpdateS
 import { useUser } from './contexts/UserContext';
 import { useEffect, useRef, useState } from 'react';
 import CreditsScreen from './screens/CreditsScreen/CreditsScreen';
+import HowToPlayScreen from './screens/HowToPlayScreen/HowToPlayScreen';
 
 const GAME_LOCK_NAME = 'ryu5kosen:game-session';
 
@@ -26,7 +27,10 @@ function App() {
     if (currentScreen === ScreenId.USER_NAME_UPDATE) {
       return <UserNameUpdateScreen />;
     }
-    return <CreditsScreen />;
+    if (currentScreen === ScreenId.CREDITS) {
+      return <CreditsScreen />;
+    }
+    return <HowToPlayScreen />;
   };
 
   const { loadUserName } = useUser();

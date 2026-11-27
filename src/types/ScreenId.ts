@@ -3,6 +3,7 @@ export const ScreenId = {
   TOP_MENU: 'TopMenu',
   USER_NAME_UPDATE: 'UserNameUpdate',
   CREDITS: 'Credits',
+  HOW_TO_PLAY: 'HowToPlay',
 } as const;
 
 export type ScreenId = (typeof ScreenId)[keyof typeof ScreenId];
@@ -16,6 +17,8 @@ export function getScreenTitle(screenId: ScreenId) {
     return 'ユーザー名更新';
   } else if (screenId === ScreenId.CREDITS) {
     return 'クレジット';
+  } else if (screenId === ScreenId.HOW_TO_PLAY) {
+    return '遊び方';
   } else {
     return 'impossible';
   }
