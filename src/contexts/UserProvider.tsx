@@ -1,8 +1,10 @@
 import { useState, type ReactNode } from 'react';
 import { UserContext } from './UserContext';
 import { signInAnonymously } from 'firebase/auth';
-import { get, ref, set } from 'firebase/database';
+import { get, ref } from 'firebase/database';
 import { auth, db } from '../firebase';
+import { databasePaths } from '../../functions/src/shared';
+import { updateUserName } from '../api/functions';
 
 type UserProviderProps = {
   children: ReactNode;
@@ -14,7 +16,7 @@ function UserProvider({ children }: UserProviderProps) {
   const loadUserName = async (): Promise<string | null> => {
     await auth.authStateReady();
     const user = auth.currentUser ?? (await signInAnonymously(auth)).user;
-    const snapshot = await get(ref(db, `users/${user.uid}/userName`));
+    const snapshot = await get(ref(db, databasePaths.users.userName(user.uid)));
 
     if (!snapshot.exists()) {
       setUserName(null);
@@ -30,14 +32,13 @@ function UserProvider({ children }: UserProviderProps) {
     return name;
   };
 
-  const saveUserName = async (name: string): Promise<void> => {
-    const user = auth.currentUser;
-    if (!user) {
+  const saveUserName = async (nameInput: string): Promise<void> => {
+    if (!auth.currentUser) {
       throw new Error('ユーザーが認証されていません');
     }
 
-    await set(ref(db, `users/${user.uid}/userName`), name);
-    setUserName(name);
+    const { data } = await updateUserName({ nameInput: nameInput });
+    setUserName(data.userName);
   };
 
   return (
