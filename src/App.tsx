@@ -6,6 +6,7 @@ import TopMenuScreen from './screens/TopMenuScreen/TopMenuScreen';
 import UserNameUpdateScreen from './screens/UserNameUpdateScreen/UserNameUpdateScreen';
 import { useUser } from './contexts/UserContext';
 import { useEffect, useRef, useState } from 'react';
+import CreditsScreen from './screens/CreditsScreen/CreditsScreen';
 
 const GAME_LOCK_NAME = 'ryu5kosen:game-session';
 
@@ -22,7 +23,10 @@ function App() {
     if (currentScreen === ScreenId.TOP_MENU) {
       return <TopMenuScreen />;
     }
-    return <UserNameUpdateScreen />;
+    if (currentScreen === ScreenId.USER_NAME_UPDATE) {
+      return <UserNameUpdateScreen />;
+    }
+    return <CreditsScreen />;
   };
 
   const { loadUserName } = useUser();

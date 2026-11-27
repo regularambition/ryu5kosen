@@ -1,0 +1,13 @@
+.credits-page {
+  width: min(100%, 42rem);
+  max-height: 60%;
+  min-height: 60%;
+  margin: 0 auto;
+  padding-inline-start: 1.5em;
+  overflow: auto;
+  overflow-wrap: anywhere;
+  text-align: start;
+  font-size: clamp(18px, 2.5vw, 30px);
+  line-height: 2.7;
+  align-content: center;
+}

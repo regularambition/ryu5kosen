@@ -18,17 +18,19 @@ function TopMenuScreen() {
   return (
     <SidebarScreenLayout onBack={() => setIsConfirmationOpen(true)}>
       <PlainButtonPair>
-        <PlainButton onClick={() => navigate(ScreenId.USER_NAME_UPDATE)}>
-          ユーザー名変更
-        </PlainButton>
+        <PlainButton onClick={() => alert('mbm')}>ゲームを遊ぶ</PlainButton>
 
         <PlainButton onClick={() => alert('fes')}>遊び方</PlainButton>
       </PlainButtonPair>
 
       <PlainButtonPair>
-        <PlainButton onClick={() => alert('vcy')}>クレジット</PlainButton>
+        <PlainButton onClick={() => navigate(ScreenId.USER_NAME_UPDATE)}>
+          ユーザー名変更
+        </PlainButton>
 
-        <PlainButton onClick={() => alert('mbm')}>ゲームを遊ぶ</PlainButton>
+        <PlainButton onClick={() => navigate(ScreenId.CREDITS)}>
+          クレジット
+        </PlainButton>
       </PlainButtonPair>
 
       <ConfirmationDialog
