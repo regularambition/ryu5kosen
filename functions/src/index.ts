@@ -35,4 +35,4 @@ import { initializeApp } from 'firebase-admin/app';
 
 initializeApp();
 
-export { updateUserName } from './exported/userProfile';
+export { updateUserName } from './exported';

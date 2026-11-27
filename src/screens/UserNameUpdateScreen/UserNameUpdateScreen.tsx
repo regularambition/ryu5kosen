@@ -5,7 +5,7 @@ import ConfirmationDialog from '../../components/ui/dialogs/ConfirmationDialog/C
 import TextInputWithHint from '../../components/ui/inputs/TextInputWithHint/TextInputWithHint';
 import { useScreenNavigation } from '../../contexts/ScreenNavigationContext';
 import { useUser } from '../../contexts/UserContext';
-import { UserNameValidator } from '../../../functions/src/shared/validators';
+import { UserNameValidator } from '../../../functions/src/shared';
 import './UserNameUpdateScreen.css';
 import { ScreenId } from '../../types/ScreenId';
 

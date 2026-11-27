@@ -1,1 +1,1 @@
-export * from './httpsErrorBuilder/common';
+export * from './httpsErrorBuilder';

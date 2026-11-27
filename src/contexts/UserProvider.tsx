@@ -4,6 +4,7 @@ import { signInAnonymously } from 'firebase/auth';
 import { get, ref } from 'firebase/database';
 import { auth, db, functions } from '../firebase';
 import { httpsCallable } from 'firebase/functions';
+import { databasePaths } from '../../functions/src/shared';
 
 type UserProviderProps = {
   children: ReactNode;
@@ -20,7 +21,7 @@ function UserProvider({ children }: UserProviderProps) {
   const loadUserName = async (): Promise<string | null> => {
     await auth.authStateReady();
     const user = auth.currentUser ?? (await signInAnonymously(auth)).user;
-    const snapshot = await get(ref(db, `users/${user.uid}/userName`));
+    const snapshot = await get(ref(db, databasePaths.users.userName(user.uid)));
 
     if (!snapshot.exists()) {
       setUserName(null);

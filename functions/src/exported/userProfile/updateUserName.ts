@@ -1,7 +1,6 @@
 import { getDatabase } from 'firebase-admin/database';
 import { onCall } from 'firebase-functions/https';
-import { region } from '../../shared/config';
-import { UserNameValidator } from '../../shared/validators';
+import { databasePaths, region, UserNameValidator } from '../../shared';
 import { getInvalidArgumentError, getUnauthenticatedError } from '../../hidden';
 
 export const updateUserName = onCall<{ name?: unknown }>(
@@ -17,7 +16,7 @@ export const updateUserName = onCall<{ name?: unknown }>(
       throw getInvalidArgumentError('ユーザー名');
     }
 
-    await getDatabase().ref(`users/${uid}/userName`).set(name);
+    await getDatabase().ref(databasePaths.users.userName(uid)).set(name);
     return { userName: name };
   },
 );
