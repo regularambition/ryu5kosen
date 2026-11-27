@@ -5,7 +5,9 @@ import PagingControls from '../../components/ui/navigation/PagingControls/Paging
 
 const urlPrefix = 'https://commons.nicovideo.jp/works/nc';
 
-const sozaiNo = [470108, 318468, 305113, 218433, 433989, 302093];
+const sozaiNo: ReadonlyArray<number> = [
+  470108, 318468, 305113, 218433, 433989, 302093,
+];
 const totalPages = Math.ceil(sozaiNo.length / 3);
 
 function CreditsScreen() {

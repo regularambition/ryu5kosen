@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import SidebarScreenLayout from '../../components/layouts/SidebarScreenLayout';
 import { PlayerChoice } from '../../types/PlayerChoice';
-import CardEffectPage from './components/CardEffectPage';
-import CardMatchupPage from './components/CardMatchupPage';
+import ChoiceEffectPage from './components/ChoiceEffectPage';
+import MatchupPage from './components/MatchupPage';
 import BasicRulePage from './components/BasicRulePage';
 
 type FinishingPair = {
@@ -107,14 +107,14 @@ function HowToPlayScreen() {
           {...pagingProps}
         />
       ) : currentPageDefinition.type === SectionType.CHOICE_EFFECT ? (
-        <CardEffectPage
+        <ChoiceEffectPage
           cardName={currentPageDefinition.choice.name}
           iconSrc={currentPageDefinition.choice.iconPath}
           description={currentPageDefinition.description}
           {...pagingProps}
         />
       ) : (
-        <CardMatchupPage
+        <MatchupPage
           pageNo={
             currentPageIndex -
             (basicRulePages.length + choiceDescriptions.size) +

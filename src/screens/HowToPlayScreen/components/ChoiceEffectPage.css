@@ -1,4 +1,4 @@
-.card-effect-page {
+.choice-effect-page {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
   align-items: start;
@@ -9,7 +9,7 @@
   min-height: 0;
 }
 
-.card-effect-page__icon-area {
+.choice-effect-page__icon-area {
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -19,7 +19,7 @@
   min-height: 0;
 }
 
-.card-effect-page__icon {
+.choice-effect-page__icon {
   display: block;
   width: min(100%, 320px);
   height: auto;
@@ -27,7 +27,7 @@
   object-fit: contain;
 }
 
-.card-effect-page__description {
+.choice-effect-page__description {
   min-width: 0;
   max-height: 100%;
   margin: 0;

@@ -1,7 +1,7 @@
 import HowToPlayPageLayout, {
   type HowToPlayPagingProps,
 } from './HowToPlayPageLayout';
-import './CardMatchupPage.css';
+import './MatchupPage.css';
 
 type CardMatchupPageProps = HowToPlayPagingProps & {
   pageNo: number;
@@ -11,7 +11,7 @@ type CardMatchupPageProps = HowToPlayPagingProps & {
   loserName: string;
 };
 
-function CardMatchupPage({
+function MatchupPage({
   pageNo,
   winnerIconSrc,
   winnerName,
@@ -24,14 +24,14 @@ function CardMatchupPage({
       title={`勝敗が決まる組み合わせ${pageNo}(左右はそれぞれ勝ち・負け)`}
       {...pagingProps}
     >
-      <div className="card-matchup-page">
+      <div className="matchup-page">
         <img
-          className="card-matchup-page__icon"
+          className="matchup-page__icon"
           src={winnerIconSrc}
           alt={`${winnerName}（勝ち）`}
         />
         <img
-          className="card-matchup-page__icon"
+          className="matchup-page__icon"
           src={loserIconSrc}
           alt={`${loserName}（負け）`}
         />
@@ -40,4 +40,4 @@ function CardMatchupPage({
   );
 }
 
-export default CardMatchupPage;
+export default MatchupPage;
