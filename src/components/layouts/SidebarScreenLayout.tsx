@@ -34,7 +34,7 @@ function SidebarScreenLayout({
       {showHeader && (
         <>
           <div className="sidebar-screen-layout__user-name">
-            <h6>{userName ?? '（未登録）'}</h6>
+            <h6>{userName ? `接続中のユーザー：${userName}` : '（未登録）'}</h6>
           </div>
           <header className="sidebar-screen-layout__title">
             <h6>{screenTitle}</h6>

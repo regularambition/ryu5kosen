@@ -77,7 +77,7 @@ function UserNameUpdateScreen() {
           errorMessage={errorMessage || undefined}
           type="text"
           value={newUserName}
-          autoComplete="username"
+          autoComplete="off"
           autoFocus
           onChange={(event) => {
             setNewUserName(event.target.value);

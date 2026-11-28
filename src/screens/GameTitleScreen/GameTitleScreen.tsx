@@ -6,7 +6,7 @@ type GameTitleScreenProps = {
 function GameTitleScreen({ isStarting, startError }: GameTitleScreenProps) {
   return (
     <>
-      <h1>ゲームタイトル</h1>
+      <h1>溜五光線</h1>
       <h2>
         任意の場所をクリックして
         <br />
