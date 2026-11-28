@@ -18,7 +18,9 @@ function TopMenuScreen() {
   return (
     <SidebarScreenLayout onBack={() => setIsConfirmationOpen(true)}>
       <PlainButtonPair>
-        <PlainButton onClick={() => alert('mbm')}>ゲームを遊ぶ</PlainButton>
+        <PlainButton onClick={() => navigate(ScreenId.MATCH_TYPE_SELECT)}>
+          ゲームを遊ぶ
+        </PlainButton>
 
         <PlainButton onClick={() => navigate(ScreenId.HOW_TO_PLAY)}>
           遊び方

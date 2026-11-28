@@ -7,7 +7,7 @@ body {
   font-family: Arial, 'Meiryo', sans-serif;
   background-color: #244f12;
   background-image: url('./assets/images/background/yozora.png');
-  color: white;
+  color: khaki;
 }
 
 h1 {
@@ -28,7 +28,8 @@ h6 {
 }
 
 [role='alert'] {
-  color: orangered;
+  color: darkblue;
+  background-image: radial-gradient(#f5e027, #ff1d1d);
 }
 
 ul li + li {

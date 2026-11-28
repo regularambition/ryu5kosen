@@ -4,6 +4,8 @@ export const ScreenId = {
   USER_NAME_UPDATE: 'UserNameUpdate',
   CREDITS: 'Credits',
   HOW_TO_PLAY: 'HowToPlay',
+  MATCH_TYPE_SELECT: 'MatchTypeSelect',
+  RANDOM_OPPONENT_SEARCHING: 'RandomOpponentSearching',
 } as const;
 
 export type ScreenId = (typeof ScreenId)[keyof typeof ScreenId];
@@ -19,6 +21,10 @@ export function getScreenTitle(screenId: ScreenId) {
     return 'クレジット';
   } else if (screenId === ScreenId.HOW_TO_PLAY) {
     return '遊び方';
+  } else if (screenId === ScreenId.MATCH_TYPE_SELECT) {
+    return '試合形式選択';
+  } else if (screenId === ScreenId.RANDOM_OPPONENT_SEARCHING) {
+    return 'マッチング中';
   } else {
     return 'impossible';
   }
