@@ -16,11 +16,21 @@ const fp: Array<FinishingPair> = [
   { winner: PlayerChoice.BEAM, loser: PlayerChoice.DEFENSE },
 ];
 
-const choiceDescriptions = new Map<PlayerChoice, string>([
-  [PlayerChoice.CHARGE, '惑星カードの効果説明をここに記載します。'],
-  [PlayerChoice.DEFENSE, '虹カードの効果説明をここに記載します。'],
-  [PlayerChoice.ATTACK, '太陽カードの効果説明をここに記載します。'],
-  [PlayerChoice.BEAM, 'サングラスカードの効果説明をここに記載します。'],
+const choiceDescriptions = new Map<PlayerChoice, readonly string[]>([
+  [
+    PlayerChoice.CHARGE,
+    ['自分のマナを1増やす', '相手が攻撃してきていると負け'],
+  ],
+  [PlayerChoice.DEFENSE, ['マナの消費量は0', '相手の攻撃を防ぐ']],
+  [PlayerChoice.ATTACK, ['マナの消費量は1', '相手に対して攻撃を仕掛ける']],
+  [
+    PlayerChoice.BEAM,
+    [
+      'マナの消費量は5',
+      '相手に対して防御不可能な攻撃を仕掛ける',
+      'この手で勝利した場合に貰えるのは1点ではなく2点',
+    ],
+  ],
 ]);
 
 const SectionType = {
@@ -34,7 +44,7 @@ type SectionType = (typeof SectionType)[keyof typeof SectionType];
 type ChoiceEffectPageDefinition = {
   type: typeof SectionType.CHOICE_EFFECT;
   choice: PlayerChoice;
-  description: string;
+  description: readonly string[];
 };
 
 type MatchupPageDefinition = {
@@ -54,11 +64,19 @@ type HowToPlayPageDefinition =
 const basicRulePages: ReadonlyArray<BasicRulePageDefinition> = [
   {
     type: SectionType.BASIC_RULE,
-    rules: ['ルール説明1', 'ルール説明2'],
+    rules: [
+      '相手を攻撃して点を積み上げ先に5点以上獲得したら勝利',
+      'ゲーム開始時点で両プレイヤーは0点と1マナを持つ',
+      '各ラウンドの思考時間は10秒',
+    ],
   },
   {
     type: SectionType.BASIC_RULE,
-    rules: ['ルール説明3', 'ルール説明4'],
+    rules: [
+      '同一の試合について、切断した場合に復帰できるのは最大で1回',
+      '行動選択はクリックだけではなく横一列に並んだカードについてそれぞれA・S・K・Lキーでも可能',
+      '相手が5点以上に達する前に諦める場合は白旗アイコンのボタンを押す',
+    ],
   },
 ];
 
@@ -67,7 +85,7 @@ const howToPlayPages: ReadonlyArray<HowToPlayPageDefinition> = [
   ...Object.values(PlayerChoice).map<ChoiceEffectPageDefinition>((choice) => ({
     type: SectionType.CHOICE_EFFECT,
     choice: choice,
-    description: choiceDescriptions.get(choice) ?? '',
+    description: choiceDescriptions.get(choice) ?? [],
   })),
   ...fp.map<MatchupPageDefinition>(({ winner, loser }) => ({
     type: SectionType.MATCHUP,

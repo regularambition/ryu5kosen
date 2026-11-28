@@ -6,7 +6,7 @@ import './ChoiceEffectPage.css';
 type ChoiceEffectPageProps = HowToPlayPagingProps & {
   cardName: string;
   iconSrc: string;
-  description: string;
+  description: readonly string[];
 };
 
 function ChoiceEffectPage({
@@ -22,7 +22,11 @@ function ChoiceEffectPage({
           <img className="choice-effect-page__icon" src={iconSrc} alt="" />
         </div>
 
-        <p className="choice-effect-page__description">{description}</p>
+        <ul className="choice-effect-page__description">
+          {description.map((desc) => (
+            <li key={desc}>{desc}</li>
+          ))}
+        </ul>
       </div>
     </HowToPlayPageLayout>
   );

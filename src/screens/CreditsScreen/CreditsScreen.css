@@ -8,6 +8,6 @@
   overflow-wrap: anywhere;
   text-align: start;
   font-size: clamp(18px, 2.5vw, 30px);
-  line-height: 2.7;
+  line-height: 1.7;
   align-content: center;
 }
