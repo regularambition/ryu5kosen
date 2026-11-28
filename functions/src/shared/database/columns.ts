@@ -3,4 +3,12 @@ export const databaseColumns = {
     nameOfTable: 'users',
     userName: 'userName',
   },
+
+  matchMakingRequests: {
+    nameOfTable: 'matchMakingRequests',
+    searchId: 'searchId',
+    status: 'status',
+    expiresAt: 'expiresAt',
+    matchId: 'matchId',
+  },
 };

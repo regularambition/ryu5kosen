@@ -35,4 +35,9 @@ import { initializeApp } from 'firebase-admin/app';
 
 initializeApp();
 
-export { updateUserName } from './exported';
+export {
+  updateUserName,
+  joinRandomMatchQueue,
+  scheduleMatchMakingTimeout,
+  expireMatchMakingRequest,
+} from './exported';
